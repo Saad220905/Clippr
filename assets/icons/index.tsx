@@ -47,7 +47,7 @@ const icons = {
     video: Video,
 }
 
-const Icon = ({name, ...props}) => {
+const Icon = ({name, ...props}: IconProps) => {
     const IconComponent = icons[name];
   return (
     <IconComponent

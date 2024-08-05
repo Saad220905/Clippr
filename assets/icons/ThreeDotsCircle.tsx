@@ -1,8 +1,8 @@
 import * as React from "react"
-import Svg, { Path } from "react-native-svg";
+import Svg, { Path, SvgProps } from "react-native-svg";
 
-const ThreeDotsCircle = (props) => (
-  <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} color="#000000" fill="none" {...props}>
+const ThreeDotsCircle = (props: SvgProps) => (
+  <Svg viewBox="0 0 24 24" width={24} height={24} color="#000000" fill="none" {...props}>
     <Path d="M11.9959 12H12.0049" stroke="currentColor" strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
     <Path d="M15.9998 12H16.0088" stroke="currentColor" strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
     <Path d="M7.99981 12H8.00879" stroke="currentColor" strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
