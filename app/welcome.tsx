@@ -3,10 +3,12 @@ import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import { StatusBar } from 'expo-status-bar'
 import { height_percentage, width_percentage } from '@/helpers/common'
-import { theme } from '@/constants/theme'
 import CustomButton from '@/components/CustomButton'
+import { theme } from '@/constants/theme'
+import { useRouter } from 'expo-router'
 
 const Welcome = () => {
+  const router = useRouter();
   return (
     <ScreenWrapper bg='white'>
       <StatusBar style='dark' />
@@ -21,14 +23,17 @@ const Welcome = () => {
         <View style={styles.footer}>
           <CustomButton 
             title='Get Started'
-            buttonStyle={{marginHorizontal: width_percentage(3)}}
-            onPress={() => {}}
+            buttonStyle={{ marginHorizontal: width_percentage(3) }}
+            onPress={() => router.push('/signUp') }
+            textStyle={undefined}
+            loading={false}
+            hasShadow={false}
           />
           <View style={styles.bottomTextContainer}>
             <Text style={styles.loginText}>
               Already have an acoount?
             </Text>
-            <Pressable>
+            <Pressable onPress={() => router.push('/signIn')}>
               <Text style={[styles.loginText, {color: theme.colors.primaryDark, fontWeight: theme.fonts.semiBold}]}>
                 Login
               </Text>
