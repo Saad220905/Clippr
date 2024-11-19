@@ -22,8 +22,9 @@ import Delete from './Delete';
 import Logout from './logout';
 import Image from './Image';
 import Video from './Video';
+import { SvgProps } from 'react-native-svg';
 
-const icons = {
+const icons: Record<string, React.FC<SvgProps>> = {
     home: Home,
     mail: Mail,
     lock: Lock,
@@ -45,19 +46,24 @@ const icons = {
     logout: Logout,
     image: Image,
     video: Video,
-}
+} as const;
 
-const Icon = ({name, ...props}: IconProps) => {
-    const IconComponent = icons[name];
+const Icon = ({ name, color, size = 24, strokeWidth = 1.9, ...props }: IconProps) => {
+  const IconComponent = icons[name];
+
+  if (!IconComponent) {
+    console.error(`Icon "${name}" does not exist in the icon set`);
+    return null;
+  }
   return (
-    <IconComponent
-        height={props.size || 24}
-        width={props.size || 24}
-        strokeWidth={props.strokeWidth || 1.9}
-        color={theme.colors.textLight}
-        {...props}
-    />
-  )
+      <IconComponent
+          height={size}
+          width={size}
+          strokeWidth={strokeWidth}
+          color={theme.colors.textLight}
+          {...props}
+      />
+  );
 }
 
 export default Icon;

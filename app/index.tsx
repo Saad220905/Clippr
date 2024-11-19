@@ -1,3 +1,4 @@
+/*
 import { View, Text, Button } from 'react-native'
 import React from 'react'
 import { useRouter } from 'expo-router'
@@ -14,3 +15,24 @@ const index = () => {
 }
 
 export default index
+*/
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import welcome from './welcome'; // Adjust import path
+import signIn from './signIn'; // Adjust import path
+
+const Stack = createNativeStackNavigator();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="welcome">
+        <Stack.Screen name="welcome" component={welcome} />
+        <Stack.Screen name="signIn" component={signIn} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;
