@@ -1,16 +1,29 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Alert, Pressable, StyleSheet, Text, TextComponent, View } from 'react-native'
+import React, { useRef, useState } from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import { StatusBar } from 'expo-status-bar'
 import BackButton from '@/components/BackButton'
 import { useRouter } from 'expo-router'
 import { height_percentage, width_percentage } from '@/helpers/common'
 import { theme } from '@/constants/theme'
+import Icon from '@/assets/icons'
+import CustomTextInput from '@/components/CustomTextInput'
+import CustomButton from '@/components/CustomButton'
 
 const SignIn = () => {
   const router = useRouter();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const onSubmit = async () => {
+    if(!emailRef.current || !passwordRef.current) {
+      Alert.alert('SignIn', "Please fill all the fields");
+      return;
+    }
+    // call the api here
+  }
   return (
-    <ScreenWrapper>
+    <ScreenWrapper bg='white'>
       <StatusBar style='dark' />
       <View style={styles.container}>
         <BackButton router={router}/>
@@ -18,6 +31,37 @@ const SignIn = () => {
         <View>
           <Text style={styles.welcomeText}>Hey,</Text>
           <Text style={styles.welcomeText}>Welcome Back</Text>
+        </View>
+        {/* form */}
+        <View style={styles.form}>
+          <Text style={{fontSize: height_percentage(1.5), color: theme.colors.text}}>
+            Please login to continue
+          </Text>
+          <CustomTextInput
+            icon={<Icon name='mail' size={26} strokeWidth={1.6} />}
+            placeholder='Enter your email'
+            onChangeText={(value: any)=>emailRef.current = value}
+          />
+          <CustomTextInput
+            icon={<Icon name='lock' size={26} strokeWidth={1.6} />}
+            placeholder='Enter your password'
+            secureTextEntry
+            onChangeText={(value: any)=>passwordRef.current = value}
+          />
+          <Text style={styles.forgotPassword}>
+            Forgot Password?
+          </Text>
+          {/* form */}
+          <CustomButton title={'SignIn'} loading={loading} onPress={onsubmit} />
+        </View>
+        {/* footer */}
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>
+            Don't have an account?
+          </Text>
+          <Pressable onPress={()=>router.push('SignUp')}>
+            <Text style={[styles.footerText, {color: theme.colors.primaryDark, fontWeight: theme.fonts.semibold}]}>Sign In</Text>
+          </Pressable>
         </View>
       </View>
     </ScreenWrapper>

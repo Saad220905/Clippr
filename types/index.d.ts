@@ -50,7 +50,7 @@ declare interface CustomButtonProps {
 }
 
 declare interface ThrobberProps {
-    size?: string;
+    size?: 'small' | 'large';
     color?: string
 }
 
@@ -63,6 +63,12 @@ declare interface IconProps {
     name: IconName;
     size?: number;
     strokeWidth?: number;
-    color: Theme
+    color?: Theme
     props?: any //allow it to implicitly define
+}
+
+declare interface CustomTextInputProps {
+    icon: any;
+    placeholder: string;
+    onChangeText: any;
 }

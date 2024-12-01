@@ -12,4 +12,11 @@ const Throbber = ({size='large', color=theme.colors.primary}: ThrobberProps) => 
 
 export default Throbber
 
-const styles = StyleSheet.create({})
+//temporary styles
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, // Ensures the View occupies available space
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

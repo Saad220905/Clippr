@@ -17,7 +17,7 @@ const index = () => {
 export default index
 */
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import welcome from './welcome'; // Adjust import path
 import signIn from './signIn'; // Adjust import path
@@ -26,12 +26,14 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="welcome">
-        <Stack.Screen name="welcome" component={welcome} />
-        <Stack.Screen name="signIn" component={signIn} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <NavigationIndependentTree>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="welcome" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="welcome" component={welcome} />
+          <Stack.Screen name="signIn" component={signIn} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </NavigationIndependentTree>
   );
 };
 
