@@ -10,7 +10,7 @@ import Icon from '@/assets/icons'
 import CustomTextInput from '@/components/CustomTextInput'
 import CustomButton from '@/components/CustomButton'
 
-const SignIn = () => {
+const signIn = () => {
   const router = useRouter();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -52,15 +52,15 @@ const SignIn = () => {
             Forgot Password?
           </Text>
           {/* form */}
-          <CustomButton title={'SignIn'} loading={loading} onPress={onsubmit} />
+          <CustomButton title={'SignIn'} loading={loading} onPress={onSubmit} />
         </View>
         {/* footer */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>
             Don't have an account?
           </Text>
-          <Pressable onPress={()=>router.push('SignUp')}>
-            <Text style={[styles.footerText, {color: theme.colors.primaryDark, fontWeight: theme.fonts.semibold}]}>Sign In</Text>
+          <Pressable onPress={()=>router.push('signUp' as any)}>
+            <Text style={[styles.footerText, {color: theme.colors.primaryDark, fontWeight: theme.fonts.semibold}]}>sign up</Text>
           </Pressable>
         </View>
       </View>
@@ -68,7 +68,7 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default signIn
 
 const styles = StyleSheet.create({
   container: {

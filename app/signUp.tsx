@@ -10,19 +10,37 @@ import Icon from '@/assets/icons'
 import CustomTextInput from '@/components/CustomTextInput'
 import CustomButton from '@/components/CustomButton'
 
-const SignUp = () => {
+const signUp = () => {
   const router = useRouter();
   const emailRef = useRef();
   const nameRef = useRef();
   const passwordRef = useRef();
   const [loading, setLoading] = useState(false);
   const onSubmit = async () => {
-    if(!emailRef.current || !passwordRef.current) {
-      Alert.alert('SignUp', "Please fill all the fields");
-      return;
-    }
-    // call the api here
-  }
+    const onSubmit = async () => {
+      if (!nameRef.current || !emailRef.current || !passwordRef.current) {
+        Alert.alert('SignUp', 'Please fill all the fields');
+        return;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailRef.current)) {
+        Alert.alert('SignUp', 'Please enter a valid email address');
+        return;
+      }
+      if (passwordRef.current.length < 6) {
+        Alert.alert('SignUp', 'Password should be at least 6 characters');
+        return;
+      }
+
+      setLoading(true);
+      try {
+        // Call the API here
+      } catch (error) {
+        Alert.alert('SignUp', 'Something went wrong. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
   return (
     <ScreenWrapper bg='white'>
       <StatusBar style='dark' />
@@ -55,15 +73,15 @@ const SignUp = () => {
             onChangeText={(value: any)=>passwordRef.current = value}
           />
           {/* form */}
-          <CustomButton title={'SignUp'} loading={loading} onPress={onsubmit} />
+          <CustomButton title={'Sign up'} loading={loading} onPress={onSubmit} />
         </View>
         {/* footer */}
         <View style={styles.footer}>
-          <Text style={styles.footerText}>
-            Already have an account?
-          </Text>
-          <Pressable onPress={()=>router.push('SignIn')}>
-            <Text style={[styles.footerText, {color: theme.colors.primaryDark, fontWeight: theme.fonts.semibold}]}>Sign up</Text>
+          <Text style={styles.footerText}>Already have an account?</Text>
+          <Pressable onPress={() => router.push('signIn' as any)}>
+            <Text style={[styles.footerText, { color: theme.colors.primaryDark, fontWeight: theme.fonts.semibold }]}>
+              Sign in
+            </Text>
           </Pressable>
         </View>
       </View>
@@ -71,7 +89,7 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default signUp
 
 const styles = StyleSheet.create({
   container: {
